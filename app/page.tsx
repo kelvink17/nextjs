@@ -5,8 +5,7 @@ import { logtoConfig } from '../app/lib/logto';
 
 const Home = async () => {
   const { isAuthenticated, claims } = await getLogtoContext(logtoConfig);
-  console.log(claims)
-
+ console.log(logtoConfig.baseUrl)
   return (
     <nav className='min-h-screen  flex item-center justify-center bg-gray-100'>
       {isAuthenticated ? (
