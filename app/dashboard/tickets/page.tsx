@@ -17,7 +17,11 @@ export default async function tickets(){
     })
     
     if (!response.ok) {
-    throw new Error(`Failed to fetch tickets: ${response.status}`)
+    return (
+        <div className="p-4 bg-red-100 text-red-700 rounded-lg">
+            Unable to load tickets ({response.status}). Please check your login session.
+        </div>
+    );
 }
     const tickets: Ticket[]= await response.json()
    console.log(tickets)

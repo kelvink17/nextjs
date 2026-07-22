@@ -2,7 +2,11 @@ import { getLogtoContext } from "@logto/next/server-actions";
 import { logtoConfig } from "@/app/lib/logto";
 
 export default async function UserProfile() {
-    const { claims } = await getLogtoContext(logtoConfig);
+    const { isAuthenticated, claims } = await getLogtoContext(logtoConfig);
+    
+    if (!isAuthenticated || !claims) {
+        return <div className="text-sm text-gray-400">Not logged in</div>;
+    }
     
     return (
         <div className="mb-8 border-b pb-6">
