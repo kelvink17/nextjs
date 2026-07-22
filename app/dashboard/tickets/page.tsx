@@ -10,7 +10,7 @@ interface Ticket {
 
 export default async function tickets(){
   const cookieStore = await cookies()
-    const response = await fetch(`/api/tickets`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tickets`, {
         headers: {
             Cookie: cookieStore.toString()
         }
