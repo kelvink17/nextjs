@@ -15,7 +15,7 @@ export default function EditTicketPage(){
     })
     useEffect(() => {
         async function fetchTicket(){
-            const response = await fetch(`/api/tickets/${id}`, {credentials: 'include'})
+            const response = await fetch(`/api/tickets/${id}`)
             const data = await response.json()
             setForm({
                 title: data.title,
@@ -35,9 +35,9 @@ export default function EditTicketPage(){
         event.preventDefault()
         const response = await fetch(`/api/tickets/${id}`,{
             method: "PUT",
-            credentials: 'include',
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                Cookie: cookieStore.toString()
             },
             body: JSON.stringify(form),
             }
