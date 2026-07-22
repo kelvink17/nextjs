@@ -17,7 +17,8 @@ export default function CreateTicketPage(){
         const response = await fetch("/api/tickets",{
             method: "POST",
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                Cookie: cookieStore.toString()
             },
             body: JSON.stringify(form),
             }

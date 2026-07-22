@@ -36,7 +36,8 @@ export default function EditTicketPage(){
         const response = await fetch(`/api/tickets/${id}`,{
             method: "PUT",
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                Cookie: cookieStore.toString()
             },
             body: JSON.stringify(form),
             }

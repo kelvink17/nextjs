@@ -1,4 +1,4 @@
-
+import { cookies } from "next/headers";
 import Link from "next/link";
 import DeleteButton from "@/app/components/DeleteButton";
 
@@ -9,8 +9,18 @@ interface Ticket {
 }
 
 export default async function tickets(){
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tickets`)
-    const tickets: Ticket[] = await response.json()
+  const cookieStore = await cookies()
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tickets`, {
+        headers: {
+            Cookie: cookieStore.toString()
+        }
+    })
+    if (!response.ok) {
+    throw new Error(`Failed to fetch tickets: ${response.status}`)
+}
+    const tickets: Ticket[]= await response.json()
+   console.log(tickets)
+   console.log(Array.isArray(tickets))
 
     
     return (

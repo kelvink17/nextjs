@@ -14,7 +14,9 @@ export default function DeleteButton({id} : DeleteButtonProps) {
         const confirmed = window.confirm("Are you sure you want to delete")
         if(!confirmed) return
 
-        const response = await fetch(`/api/tickets/${id}`, {method: "DELETE"})
+        const response = await fetch(`/api/tickets/${id}`, {method: "DELETE",  headers: {
+                Cookie: cookieStore.toString()
+            }})
           if(!response.ok){
             console.log(response.status)
             console.log( await response.text())
