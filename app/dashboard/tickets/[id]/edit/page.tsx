@@ -16,9 +16,6 @@ export default function EditTicketPage(){
     useEffect(() => {
         async function fetchTicket(){
             const response = await fetch(`/api/tickets/${id}`)
-             if (!response.ok) {
-    return { error: response.statusText };
-  }
             const data = await response.json()
             setForm({
                 title: data.title,

@@ -15,11 +15,10 @@ export default async function tickets(){
             Cookie: cookieStore.toString()
         }
     })
-        if (!response.ok) {
-    return { error: response.statusText }}
-//     if (!response.ok) {
-//     throw new Error(`Failed to fetch tickets: ${response.status}`)
-// }
+    
+    if (!response.ok) {
+    throw new Error(`Failed to fetch tickets: ${response.status}`)
+}
     const tickets: Ticket[]= await response.json()
    console.log(tickets)
    console.log(Array.isArray(tickets))
