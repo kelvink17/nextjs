@@ -10,11 +10,14 @@ interface Ticket {
 
 export default async function tickets(){
   const cookieStore = await cookies()
-    const response = await fetch(`/api/tickets`, {
-        headers: {
-            Cookie: cookieStore.toString()
-        }
-    })
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL 
+  || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    const response = await fetch(`${baseUrl}/api/tickets`, {
+    headers: {
+        Cookie: cookieStore.toString()
+    },
+    cache: "no-store"
+})
     
     if (!response.ok) {
     return (
