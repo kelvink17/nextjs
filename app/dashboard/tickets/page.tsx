@@ -10,14 +10,16 @@ interface Ticket {
 
 export default async function tickets(){
   const cookieStore = await cookies()
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/tickets`, {
+    const response = await fetch(`/api/tickets`, {
         headers: {
             Cookie: cookieStore.toString()
         }
     })
-    if (!response.ok) {
-    throw new Error(`Failed to fetch tickets: ${response.status}`)
-}
+        if (!response.ok) {
+    return { error: response.statusText }}
+//     if (!response.ok) {
+//     throw new Error(`Failed to fetch tickets: ${response.status}`)
+// }
     const tickets: Ticket[]= await response.json()
    console.log(tickets)
    console.log(Array.isArray(tickets))

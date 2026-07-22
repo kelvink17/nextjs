@@ -15,7 +15,10 @@ export default function EditTicketPage(){
     })
     useEffect(() => {
         async function fetchTicket(){
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/tickets/${id}`, {credentials: 'include'})
+            const response = await fetch(`/api/tickets/${id}`)
+             if (!response.ok) {
+    return { error: response.statusText };
+  }
             const data = await response.json()
             setForm({
                 title: data.title,
@@ -33,11 +36,11 @@ export default function EditTicketPage(){
 
      const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) =>{
         event.preventDefault()
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/tickets/${id}`,{
+        const response = await fetch(`/api/tickets/${id}`,{
             method: "PUT",
-            credentials: 'include',
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                Cookie: cookieStore.toString()
             },
             body: JSON.stringify(form),
             }

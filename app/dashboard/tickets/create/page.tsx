@@ -23,9 +23,11 @@ export default function CreateTicketPage(){
             body: JSON.stringify(form),
             }
         )
-        if(!response.ok){
-            throw new Error("Failed to create ticket")
-        }
+            if (!response.ok) {
+    return { error: response.statusText }}
+        // if(!response.ok){
+        //     throw new Error("Failed to create ticket")
+        // }
         router.push("/dashboard/tickets")
     }
     return(
